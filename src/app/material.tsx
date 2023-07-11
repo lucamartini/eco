@@ -1,12 +1,12 @@
 "use client";
 
-import { theme } from "./theme/themes";
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import { CssBaseline } from "@mui/material";
+import { StyledEngineProvider } from "@mui/material/styles";
 import { Button, Grid, Stack } from "@mui/material";
 
 export default function Home() {
   return (
-    <ThemeProvider theme={theme}>
+    <StyledEngineProvider injectFirst>
       <CssBaseline />
       <Grid
         container
@@ -25,6 +25,6 @@ export default function Home() {
           <Button variant="outlined">Outlined</Button>
         </Stack>
       </Grid>
-    </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
