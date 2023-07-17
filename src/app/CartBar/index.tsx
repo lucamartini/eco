@@ -6,8 +6,9 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
+import CartButton from "./CartButton";
 
-export default function CartBar(params) {
+export default function CartBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,6 +26,7 @@ export default function CartBar(params) {
             <Link href="/">E-co </Link>
           </Typography>
           <Button color="inherit">Login</Button>
+          <CartButton />
         </Toolbar>
       </AppBar>
     </Box>
