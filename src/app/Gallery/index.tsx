@@ -11,19 +11,19 @@ import CardActionArea from "@mui/material/CardActionArea";
 async function getItems() {
   return [
     {
-      id: 1,
+      id: "1",
       icon: <HouseIcon fontSize="large" />,
-      text: "house",
+      text: "a house",
     },
     {
-      id: 2,
+      id: "2",
       icon: <ToysIcon fontSize="large" sx={{ color: "red" }} />,
-      text: "toys",
+      text: "a toy",
     },
     {
-      id: 3,
+      id: "3",
       icon: <PetsIcon fontSize="large" sx={{ color: "blue" }} />,
-      text: "pets",
+      text: "a pet",
     },
   ];
 }
