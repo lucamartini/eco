@@ -1,7 +1,7 @@
 "use client";
 
-import { CartProvider } from "./Cart";
+import { RecoilRoot } from "recoil";
 
 export default function Providers(props: { children: React.ReactNode }) {
-  return <CartProvider>{props.children}</CartProvider>;
+  return <RecoilRoot>{props.children}</RecoilRoot>;
 }

@@ -1,10 +1,11 @@
 "use client";
 
-import { useCart } from "../providers/Cart";
 import Button from "@mui/material/Button";
+import { useRecoilValue } from "recoil";
+import { cartLengthState } from "@/app/providers/cartAtom";
 
 export default function CartButton() {
-  const cart = useCart();
+  const cartLength = useRecoilValue(cartLengthState);
 
-  return <Button color="inherit">{`Cart (${cart.length})`}</Button>;
+  return <Button color="inherit">{`Cart (${cartLength})`}</Button>;
 }

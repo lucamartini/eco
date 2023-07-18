@@ -1,20 +1,17 @@
 "use client";
 
 import Button from "@mui/material/Button";
-import { useCartDispatch } from "../../providers/Cart";
+import { useRecoilState } from "recoil";
+import { cartState } from "@/app/providers/cartAtom";
 
 export default function Buy(props: { id: string }) {
   const { id } = props;
-  const cartDispatch = useCartDispatch();
+  const [cart, setCart] = useRecoilState(cartState);
 
   return (
     <Button
       onClick={() => {
-        console.log(id);
-        cartDispatch({
-          type: "add",
-          id: id,
-        });
+        setCart((oldCart) => [...oldCart, { id }]);
       }}
     >
       Add to cart
