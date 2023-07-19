@@ -5,20 +5,34 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Button from "@mui/material/Button";
 import { useTranslations } from "next-intl";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 interface LoginInput {
   email: string;
   password: string;
 }
 
+const schema = yup
+  .object({
+    email: yup.string().required(),
+    password: yup.string().required().min(8),
+  })
+  .required();
+
 export default function Login() {
   const t = useTranslations("Auth");
 
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
+    resolver: yupResolver(schema),
   });
 
   const onSubmit: SubmitHandler<LoginInput> = (data) => console.log(data);
@@ -39,6 +53,9 @@ export default function Login() {
                     variant="standard"
                     label={t("email")}
                     fullWidth
+                    error={Boolean(errors?.email)}
+                    helperText={errors?.email && t(errors.email.type)}
+                    type="email"
                   />
                 )}
               />
@@ -53,6 +70,9 @@ export default function Login() {
                     variant="standard"
                     label={t("password")}
                     fullWidth
+                    error={Boolean(errors?.password)}
+                    helperText={errors?.password && t(errors.password.type)}
+                    type="password"
                   />
                 )}
               />

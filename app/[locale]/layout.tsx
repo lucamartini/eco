@@ -22,8 +22,6 @@ export default async function RootLayout(props: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // const locale = useLocale();
-
   const {
     children,
     params: { locale },

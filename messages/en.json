@@ -2,7 +2,9 @@
   "Auth": {
     "email": "email",
     "password": "password",
-    "submit": "log in"
+    "submit": "log in",
+    "required": "required",
+    "min": "at least 8 characters"
   },
   "CartBar": {
     "login": "login",
