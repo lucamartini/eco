@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 
 interface LoginInput {
   email: string;
@@ -11,6 +12,8 @@ interface LoginInput {
 }
 
 export default function Login() {
+  const t = useTranslations("Auth");
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -34,7 +37,7 @@ export default function Login() {
                   <TextField
                     {...field}
                     variant="standard"
-                    label="email"
+                    label={t("email")}
                     fullWidth
                   />
                 )}
@@ -48,7 +51,7 @@ export default function Login() {
                   <TextField
                     {...field}
                     variant="standard"
-                    label="password"
+                    label={t("password")}
                     fullWidth
                   />
                 )}
@@ -56,7 +59,7 @@ export default function Login() {
             </Grid>
             <Grid xs={12}>
               <Button type="submit" fullWidth>
-                submit
+                {t("submit")}
               </Button>
             </Grid>
           </Grid>

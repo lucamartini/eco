@@ -1,0 +1,11 @@
+{
+  "Auth": {
+    "email": "email",
+    "password": "password",
+    "submit": "accedi"
+  },
+  "CartBar": {
+    "login": "login",
+    "cart": "carrello"
+  }
+}

@@ -2,7 +2,7 @@
 
 import Button from "@mui/material/Button";
 import { useSetRecoilState } from "recoil";
-import { cartState } from "@/app/providers/cartAtom";
+import { cartState } from "../../providers/cartAtom";
 
 export default function Buy(props: { id: string }) {
   const { id } = props;
