@@ -1,12 +1,12 @@
 "use client";
 
 import Button from "@mui/material/Button";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { cartState } from "@/app/providers/cartAtom";
 
 export default function Buy(props: { id: string }) {
   const { id } = props;
-  const [cart, setCart] = useRecoilState(cartState);
+  const setCart = useSetRecoilState(cartState);
 
   return (
     <Button
