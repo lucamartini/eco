@@ -50,7 +50,6 @@ export default function Login() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    variant="standard"
                     label={t("email")}
                     fullWidth
                     error={Boolean(errors?.email)}
@@ -67,7 +66,6 @@ export default function Login() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    variant="standard"
                     label={t("password")}
                     fullWidth
                     error={Boolean(errors?.password)}
