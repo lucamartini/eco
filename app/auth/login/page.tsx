@@ -6,15 +6,17 @@ import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Button from "@mui/material/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Cookies from "universal-cookie";
+import dayjs from "dayjs";
 
 interface LoginInput {
-  email: string;
+  username: string;
   password: string;
 }
 
 const schema = yup
   .object({
-    email: yup.string().required(),
+    username: yup.string().required(),
     password: yup.string().required().min(8),
   })
   .required();
@@ -26,13 +28,34 @@ export default function Login() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
     resolver: yupResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<LoginInput> = (data) => {
+    console.log(data);
+    const { username, password } = data;
+    fetch("https://dummyjson.com/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        password,
+        expiresInMins: 60, // optional
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        const cookies = new Cookies();
+        cookies.set("eco-auth", json.token, {
+          path: "/",
+          domain: "localhost",
+          expires: new Date(dayjs().add(3600, "s").format()),
+        });
+      });
+  };
 
   return (
     <Grid container>
@@ -40,18 +63,19 @@ export default function Login() {
       <Grid xs={12} md={4}>
         <form onSubmit={handleSubmit(onSubmit)} className="m-8">
           <Grid container spacing={2}>
+            <Grid xs={12}>fake username atuny0</Grid>
+            <Grid xs={12}>fake password 9uQFF1Lh</Grid>
             <Grid xs={12}>
               <Controller
-                name="email"
+                name="username"
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label={"email"}
+                    label={"username"}
                     fullWidth
-                    error={Boolean(errors?.email)}
-                    helperText={errors?.email && errors.email.message}
-                    type="email"
+                    error={Boolean(errors?.username)}
+                    helperText={errors?.username && errors.username.message}
                   />
                 )}
               />
