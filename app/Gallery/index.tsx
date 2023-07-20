@@ -28,8 +28,6 @@ async function getItems() {
   ];
 }
 
-const Boh = () => <div />;
-
 export default async function Gallery() {
   const items = await getItems();
 

@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Button from "@mui/material/Button";
-import { useTranslations } from "next-intl";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -21,8 +20,6 @@ const schema = yup
   .required();
 
 export default function Login() {
-  const t = useTranslations("Auth");
-
   const {
     control,
     handleSubmit,
@@ -50,10 +47,10 @@ export default function Login() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label={t("email")}
+                    label={"email"}
                     fullWidth
                     error={Boolean(errors?.email)}
-                    helperText={errors?.email && t(errors.email.type)}
+                    helperText={errors?.email && errors.email.message}
                     type="email"
                   />
                 )}
@@ -66,10 +63,10 @@ export default function Login() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label={t("password")}
+                    label={"password"}
                     fullWidth
                     error={Boolean(errors?.password)}
-                    helperText={errors?.password && t(errors.password.type)}
+                    helperText={errors?.password && errors.password.message}
                     type="password"
                   />
                 )}
@@ -77,7 +74,7 @@ export default function Login() {
             </Grid>
             <Grid xs={12}>
               <Button type="submit" fullWidth>
-                {t("submit")}
+                {"submit"}
               </Button>
             </Grid>
           </Grid>
