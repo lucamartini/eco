@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import CartBar from "./CartBar";
 import Providers from "./providers/Providers";
-import { useLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 
@@ -26,7 +25,6 @@ export default async function RootLayout(props: {
     children,
     params: { locale },
   } = props;
-  console.log("locale", locale);
 
   // Show a 404 error if the user requests an unknown locale
   let messages;
