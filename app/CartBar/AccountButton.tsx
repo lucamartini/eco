@@ -3,13 +3,18 @@
 import Link from "next/link";
 import PersonIcon from "@mui/icons-material/Person";
 import { useRecoilValue } from "recoil";
-import { tokenState } from "../providers/tokenAtom";
+import { authenticationState } from "../providers/authenticationAtom";
 
 export default function AccountButton() {
-  const signedIn = useRecoilValue(tokenState);
+  const signedIn = useRecoilValue(authenticationState);
 
   if (signedIn) {
-    return <PersonIcon fontSize="large" />;
+    return (
+      <Link href={"/auth/user"}>
+        {" "}
+        <PersonIcon fontSize="large" />{" "}
+      </Link>
+    );
   } else {
     return <Link href={"/auth/login"}>{"login"}</Link>;
   }

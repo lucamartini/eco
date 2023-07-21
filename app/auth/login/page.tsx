@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useSetRecoilState } from "recoil";
-import { tokenState } from "../../providers/tokenAtom";
+import { authenticationState } from "../../providers/authenticationAtom";
 import { useRouter } from "next/navigation";
 
 interface LoginInput {
@@ -23,7 +23,7 @@ const schema = yup
   .required();
 
 export default function Login() {
-  const setTokenState = useSetRecoilState(tokenState);
+  const setAuthenticationState = useSetRecoilState(authenticationState);
   const router = useRouter();
 
   const {
@@ -39,7 +39,6 @@ export default function Login() {
   });
 
   const onSubmit: SubmitHandler<LoginInput> = (data) => {
-    console.log(data);
     const { username, password } = data;
     fetch("https://dummyjson.com/auth/login", {
       method: "POST",
@@ -52,7 +51,10 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((json) => {
-        setTokenState(json.token);
+        setAuthenticationState({
+          token: json.token,
+          id: json.id,
+        });
         router.push("/");
       });
   };
