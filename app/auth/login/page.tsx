@@ -6,8 +6,9 @@ import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Button from "@mui/material/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Cookies from "universal-cookie";
-import dayjs from "dayjs";
+import { useSetRecoilState } from "recoil";
+import { tokenState } from "../../providers/tokenAtom";
+import { useRouter } from "next/navigation";
 
 interface LoginInput {
   username: string;
@@ -22,6 +23,9 @@ const schema = yup
   .required();
 
 export default function Login() {
+  const setTokenState = useSetRecoilState(tokenState);
+  const router = useRouter();
+
   const {
     control,
     handleSubmit,
@@ -48,12 +52,8 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((json) => {
-        const cookies = new Cookies();
-        cookies.set("eco-auth", json.token, {
-          path: "/",
-          domain: "localhost",
-          expires: new Date(dayjs().add(3600, "s").format()),
-        });
+        setTokenState(json.token);
+        router.push("/");
       });
   };
 
