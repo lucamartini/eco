@@ -5,11 +5,18 @@ import { authenticationState } from "../../providers/authenticationAtom";
 import UserDetail from "./userDetails";
 import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
+import { useLayoutEffect } from "react";
 
 export default function User() {
   const authentication = useRecoilValue(authenticationState);
   const resetAuthentication = useResetRecoilState(authenticationState);
   const router = useRouter();
+
+  useLayoutEffect(() => {
+    if (!authentication) {
+      router.push("/auth/login");
+    }
+  });
 
   if (authentication) {
     return (
@@ -17,7 +24,6 @@ export default function User() {
         <Button
           onClick={() => {
             resetAuthentication();
-            router.push("/auth/login");
           }}
         >
           {"log out"}
@@ -26,6 +32,6 @@ export default function User() {
       </>
     );
   } else {
-    router.push("/auth/login");
+    return null;
   }
 }

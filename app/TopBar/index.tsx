@@ -10,7 +10,7 @@ import AccountButton from "./AccountButton";
 
 export default function CartBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, marginBottom: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton

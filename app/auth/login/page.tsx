@@ -30,6 +30,7 @@ export default function Login() {
     control,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
       username: "",
@@ -63,10 +64,26 @@ export default function Login() {
     <Grid container>
       <Grid md={4} />
       <Grid xs={12} md={4}>
-        <form onSubmit={handleSubmit(onSubmit)} className="m-8">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
-            <Grid xs={12}>fake username atuny0</Grid>
-            <Grid xs={12}>fake password 9uQFF1Lh</Grid>
+            <Grid xs={12}>
+              <Button
+                onClick={() => {
+                  setValue("username", "atuny0");
+                }}
+              >
+                test username: atuny0
+              </Button>
+            </Grid>
+            <Grid xs={12}>
+              <Button
+                onClick={() => {
+                  setValue("password", "9uQFF1Lh");
+                }}
+              >
+                test password: 9uQFF1Lh
+              </Button>
+            </Grid>
             <Grid xs={12}>
               <Controller
                 name="username"
@@ -100,7 +117,7 @@ export default function Login() {
             </Grid>
             <Grid xs={12}>
               <Button type="submit" fullWidth>
-                {"submit"}
+                {"login"}
               </Button>
             </Grid>
           </Grid>

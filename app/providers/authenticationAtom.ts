@@ -6,23 +6,26 @@ const localStorageEffect =
     setSelf: (arg0: { token: string; id: string }) => void;
     onSet: (arg0: any) => void;
   }) => {
-    const { setSelf, onSet } = args;
-    const savedValue = localStorage.getItem(key);
-    if (savedValue != null) {
-      setSelf(JSON.parse(savedValue));
-    }
+    if (typeof window !== "undefined") {
+      const { setSelf, onSet } = args;
 
-    onSet(
-      (
-        newValue: { token: string; id: string },
-        _: string,
-        isReset: boolean
-      ) => {
-        isReset
-          ? localStorage.removeItem(key)
-          : localStorage.setItem(key, JSON.stringify(newValue));
+      const savedValue = localStorage.getItem(key);
+      if (savedValue != null) {
+        setSelf(JSON.parse(savedValue));
       }
-    );
+
+      onSet(
+        (
+          newValue: { token: string; id: string },
+          _: string,
+          isReset: boolean
+        ) => {
+          isReset
+            ? localStorage.removeItem(key)
+            : localStorage.setItem(key, JSON.stringify(newValue));
+        }
+      );
+    }
   };
 
 export const authenticationState = atom({

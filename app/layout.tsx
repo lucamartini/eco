@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import CartBar from "./CartBar";
+import CartBar from "./TopBar";
 import Providers from "./providers/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +19,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body className={inter.className}>
         <Providers>
           <CartBar />
-          <main className="mt-8">{children}</main>
+          <main>{children}</main>
         </Providers>
       </body>
     </html>
